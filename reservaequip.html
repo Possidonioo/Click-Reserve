@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Click&Reserve - Reserva de Equipamentos</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      height: 100%;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to bottom, #d7e1ec, #b1bbb7);
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to bottom, #d7e1ec, #b1bbb7);
+      background-size: cover;
+      background-position: center;
+      opacity: 0.5;
+      z-index: -1;
+    }
+
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 75px;
+      background: linear-gradient(to right, #43cea2, #185a9d);
+      text-align: center;
+      border-bottom: 1px solid #ccc;
+      z-index: 1000;
+      padding: 15px 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Georgia', serif;
+      color: white;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 1.5rem;
+    }
+
+    .logo-img {
+      width: 100px;
+      height: 100px;
+      margin-right: 10px;
+      object-fit: contain;
+    }
+
+    .login-container {
+      flex: 1;
+      background: rgba(228, 221, 221, 0.8); 
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+      width: 90%;
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
+      overflow-y: auto;
+      margin-top: 100px; 
+    }
+
+    .login-container h2 {
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .image-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+
+    .image-wrapper {
+      background-color: #0097b2;
+      padding: 10px;
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 200px;
+    }
+
+    .image-wrapper img {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .image-wrapper label {
+      margin-top: 10px;
+      font-size: 14px;
+      color: #fff;
+    }
+
+    .login-container input,
+    .login-container select {
+      width: 80%;
+      padding: 10px;
+      margin: 10px auto;
+      display: block;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    .login-container button {
+      width: 70%;
+      padding: 10px;
+      background: linear-gradient(to right, #43cea2, #185a9d);
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin: 5px auto;
+      display: block;
+    }
+
+    .signup-link {
+      margin-top: 10px;
+      font-size: 14px;
+      text-align: center;
+    }
+
+    .signup-link a {
+      color: #0097b2;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .signup-link a:hover {
+      text-decoration: underline;
+      color: #0097b2c0;
+    }
+
+    /* Responsividade para telas menores */
+    @media (max-width: 768px) {
+      .image-wrapper img {
+        width: 60px;
+        height: 60px;
+      }
+
+      .login-container {
+        padding: 15px;
+      }
+
+      .image-wrapper {
+        height: 180px;
+      }
+
+      .login-container input,
+      .login-container select {
+        width: 100%;
+        font-size: 14px;
+      }
+
+      .login-container button {
+        width: 90%;
+        font-size: 14px;
+      }
+
+      .header {
+        height: 60px;
+        padding: 10px 0;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .image-wrapper img {
+        width: 50px;
+        height: 50px;
+      }
+
+      .image-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .login-container input,
+      .login-container select {
+        width: 90%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="logo">
+      <img src="logo3s.png" alt="Logo" class="logo-img">
+      <span class="logo-text">Click&Reserve</span>
+    </div>
+  </header>
+
+  <div class="login-container">
+    <h2>Reserva de Equipamentos</h2>
+    <form>
+      <input type="text" id="search-input" placeholder="Buscar equipamentos..." />
+
+      <div id="no-results" style="display: none; color: red; font-weight: bold; text-align: center; margin-top: 10px;">
+        Equipamento não encontrado :(
+      </div>
+
+      <div class="image-grid">
+        <div class="image-wrapper">
+          <img src="projetor.jpg" alt="Projetor">
+          <label for="nome1">Projetor:</label>
+          <input type="text" id="nome1" placeholder="Digite seu nome">
+        </div>
+        <div class="image-wrapper">
+          <img src="caixadesom.jpg" alt="Caixa de Som">
+          <label for="nome2">Caixa de Som:</label>
+          <input type="text" id="nome2" placeholder="Digite seu nome">
+        </div>
+        <div class="image-wrapper">
+          <img src="notebook.webp" alt="Notebook">
+          <label for="nome3">Notebook:</label>
+          <input type="text" id="nome3" placeholder="Digite seu nome">
+        </div>
+        <div class="image-wrapper">
+          <img src="camera.webp" alt="Câmera">
+          <label for="nome4">Câmera:</label>
+          <input type="text" id="nome4" placeholder="Digite seu nome">
+        </div>
+        <div class="image-wrapper">
+          <img src="microfone.webp" alt="Microfone">
+          <label for="nome5">Microfone:</label>
+          <input type="text" id="nome5" placeholder="Digite seu nome">
+        </div>
+        <div class="image-wrapper">
+          <img src="mesa.webp" alt="Mesa de Som">
+          <label for="nome6">Mesa de Som:</label>
+          <input type="text" id="nome6" placeholder="Digite seu nome">
+        </div>
+      </div>
+
+      <!-- Data e Hora -->
+      <label for="data">Data da Reserva:</label>
+      <input type="date" id="data" name="data">
+
+      <label for="hora">Horário da Reserva:</label>
+      <input type="time" id="hora" name="hora">
+
+      <div id="mensagemSucesso" style="display:none; color: green; font-weight: bold; text-align: center; margin: 15px 0;">
+        Reserva concluída com sucesso!
+      </div>
+
+      <button type="button" onclick="mostrarMensagem()">Reservar</button>
+      <button type="reset">Apagar</button>
+      <button class="voltar-btn" onclick="window.location.href='paginicial.html'">Voltar</button>
+    </form>
+  </div>
+
+  <script>
+    function mostrarMensagem() {
+      const nomes = [
+        document.getElementById("nome1").value.trim(),
+        document.getElementById("nome2").value.trim(),
+        document.getElementById("nome3").value.trim(),
+        document.getElementById("nome4").value.trim(),
+        document.getElementById("nome5").value.trim(),
+        document.getElementById("nome6").value.trim()
+      ];
+  
+      const data = document.getElementById("data").value.trim();
+      const hora = document.getElementById("hora").value.trim();
+      const mensagem = document.getElementById("mensagemSucesso");
+  
+      const peloMenosUmNome = nomes.some(nome => nome !== "");
+      const dataPreenchida = data !== "";
+      const horaPreenchida = hora !== "";
+  
+      if (peloMenosUmNome && dataPreenchida && horaPreenchida) {
+        mensagem.style.color = "green";
+        mensagem.textContent = "Reserva concluída com sucesso!";
+      } else {
+        mensagem.style.color = "red";
+        mensagem.textContent = "Preencha todos os campos obrigatórios!";
+      }
+  
+      mensagem.style.display = "block";
+    }
+
+    document.getElementById('search-input').addEventListener('input', function () {
+      const searchValue = this.value.toLowerCase();
+      const items = document.querySelectorAll('.image-wrapper');
+      let anyVisible = false;
+
+      items.forEach(item => {
+        const labelText = item.querySelector('label').textContent.toLowerCase();
+        const isVisible = labelText.includes(searchValue);
+        item.style.display = isVisible ? 'flex' : 'none';
+        if (isVisible) anyVisible = true;
+      });
+
+      document.getElementById('no-results').style.display = anyVisible ? 'none' : 'block';
+    });
+  </script>
+</body>
+</html>
