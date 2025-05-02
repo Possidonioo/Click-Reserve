@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Click&Reserve - Página Inicial</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+  
+    body {
+      background-color: #f4f4f4;
+      color: #333;
+    }
+  
+    header {
+      background: linear-gradient(to right, #43cea2, #185a9d);
+      color: #fff;
+      padding: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+  
+    header h1 {
+      font-size: 24px;
+      font-family: 'Georgia', serif;
+    }
+  
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      justify-content: center;
+      margin-top: 10px;
+    }
+  
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 16px;
+    }
+  
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+  
+    .logo-img {
+      height: 40px;
+    }
+  
+    .hero {
+      background-color: #16b391;
+      color: #fff;
+      padding: 60px 20px;
+      text-align: center;
+    }
+  
+    .hero h2 {
+      font-size: 36px;
+      margin-bottom: 10px;
+    }
+  
+    .hero p {
+      font-size: 18px;
+      margin-bottom: 20px;
+    }
+  
+    .hero a {
+      background-color: #fff;
+      color: #e6eff8;
+      padding: 12px 25px;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: bold;
+    }
+  
+    .reservados-btn {
+      display: inline-block;
+      background: linear-gradient(to right, #43cea2, #185a9d);
+      padding: 14px 28px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 16px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+  
+    .reservados-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.25);
+    }
+  
+    .benefits,
+    .equipamentos,
+    .como-funciona {
+      padding: 40px 20px;
+      max-width: 1000px;
+      margin: auto;
+    }
+  
+    .benefits h3,
+    .equipamentos h3,
+    .como-funciona h3 {
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 24px;
+    }
+  
+    .benefit-items,
+    .equipamento-lista,
+    .passos {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+    }
+  
+    .benefit,
+    .equipamento,
+    .passo {
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      flex: 1 1 200px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+  
+    footer {
+      background: linear-gradient(to right, #43cea2, #185a9d);
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
+    }
+  
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+  
+      .logo-container {
+        flex-direction: column;
+      }
+  
+      nav {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+        margin-top: 10px;
+      }
+  
+      nav a {
+        margin: 5px;
+        font-size: 14px;
+      }
+  
+      .hero h2 {
+        font-size: 28px;
+      }
+  
+      .hero p {
+        font-size: 16px;
+      }
+  
+      .reservados-btn {
+        font-size: 14px;
+        padding: 10px 20px;
+      }
+  
+      .benefit,
+      .equipamento,
+      .passo {
+        flex: 1 1 100%;
+      }
+  
+      .benefits,
+      .equipamentos,
+      .como-funciona {
+        padding: 20px 10px;
+      }
+  
+      .benefits h3,
+      .equipamentos h3,
+      .como-funciona h3 {
+        font-size: 20px;
+      }
+  
+      .logo-img {
+        height: 35px;
+      }
+  
+      h1 {
+        font-size: 22px;
+      }
+    }
+  
+    @media (max-width: 400px) {
+      .hero h2 {
+        font-size: 22px;
+      }
+  
+      .hero p {
+        font-size: 14px;
+      }
+  
+      .reservados-btn {
+        font-size: 12px;
+        padding: 8px 16px;
+      }
+  
+      nav a {
+        font-size: 12px;
+      }
+  
+      h1 {
+        font-size: 20px;
+      }
+    }
+  </style>
+  
+</head>
+<body>
+  <header>
+    <div class="logo-container">
+        <img src="logo3s.png" alt="Logo" class="logo-img">
+        <h1>Click&Reserve</h1>
+      </div>
+    <nav>
+      <a href="paginicial.html">Início</a>
+      <a href="equipamentos.html">Equipamentos</a>
+      <a href="reservaequip.html">Reservar Equipamento</a>
+      <a href="login.html">Login</a>
+      <a href="cadastro.html">Cadastro</a>
+      <a href="acessoadm.html">Acesso ADM</a>
+    </nav>
+  </header>
+  <section class="hero">
+    <h2>Reserve seus Equipamentos Multimídia!</h2>
+    <p>Câmeras, projetores, microfones e muito mais.</p>
+    <a href="reservados.html" class="reservados-btn">Ver Equipamentos já reservados</a>
+</section>
+  <section class="benefits">
+    <h3>Vantagens</h3>
+    <div class="benefit-items">
+      <div class="benefit">
+        <h4>Reserva Rápida</h4>
+        <p>Faça tudo online em poucos cliques.</p>
+      </div>
+      <div class="benefit">
+        <h4>Equipamentos Atualizados</h4>
+        <p>Tenha acesso ao que há de melhor no mercado.</p>
+      </div>
+    </div>
+  </section>
+  <section class="equipamentos">
+    <h3>Equipamentos em Destaque</h3>
+    <div class="equipamento-lista">
+      <div class="equipamento">
+        <h4>Câmera DSLR</h4>
+        <p>Alta resolução para fotos e vídeos.</p>
+      </div>
+      <div class="equipamento">
+        <h4>Projetor Full HD</h4>
+        <p>Ideal para apresentações e eventos.</p>
+      </div>
+      <div class="equipamento">
+        <h4>Microfone de Lapela</h4>
+        <p>Áudio claro para gravações e entrevistas.</p>
+      </div>
+    </div>
+  </section>
+  <section class="como-funciona">
+    <h3>Como Funciona</h3>
+    <div class="passos">
+      <div class="passo">
+        <h4>1. Escolha</h4>
+        <p>Veja os equipamentos disponíveis.</p>
+      </div>
+      <div class="passo">
+        <h4>2. Agende</h4>
+        <p>Selecione a data e horário de retirada.</p>
+      </div>
+      <div class="passo">
+        <h4>3. Retire</h4>
+        <p>Vá até o local e retire o equipamento.</p>
+      </div>
+    </div>
+  </section>
+  <footer>
+    <p>© 2025 Click&Reserve. Todos os direitos reservados.</p>
+  </footer>
+</body>
+</html>
