@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Click&Reserve - Cadastro de Professores</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(to bottom, #d7e1ec, #b1bbb7);
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, #d7e1ec, #b1bbb7);
+            background-size: cover;
+            background-position: center;
+            opacity: 0.4;
+            z-index: -1;
+        }
+
+        .header {
+            background: linear-gradient(to right, #43cea2, #185a9d);
+            text-align: center;
+            padding: 10px 0;
+            position: sticky;
+            top: 0;
+            width: 100%;
+            z-index: 10;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.5rem;
+            color: white;
+            font-family: 'Georgia', serif;
+        }
+
+        .logo-img {
+            width: 80px;
+            height: 80px;
+            margin-right: 10px;
+            object-fit: contain;
+        }
+
+        .form-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 40px;
+            padding: 30px 20px;
+        }
+
+        form {
+            flex: 1 1 300px;
+            background-color: #ffffffcc;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        form input,
+        form button {
+            width: 90%;
+            display: block;
+            margin: 10px 0;
+            padding: 12px;
+            font-size: 1rem;
+        }
+
+        form button {
+            background: linear-gradient(to right, #43cea2, #185a9d);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        form button:hover {
+            opacity: 0.9;
+        }
+
+        #success-message-edit-prof {
+            text-align: center;
+            font-weight: bold;
+            margin-top: 15px;
+            display: none;
+        }
+
+        h2, h3 {
+            font-family: 'Georgia', serif;
+            text-align: center;
+        }
+
+        .voltar-btn {
+            width: 200px;
+            padding: 12px;
+            background: linear-gradient(to right, #43cea2, #185a9d);
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            margin-top: 10px;
+            margin-bottom: 50px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <img src="logo3s.png" alt="Logo" class="logo-img">
+            <span class="logo-text">Click&Reserve</span>
+        </div>
+    </header>
+
+    <h3>Acesso permitido apenas a Administradores</h3>
+
+    <div class="form-container">
+        <form id="editar-professor-form" class="form-professor">
+            <h2>Edição de Professores</h2>
+            <input type="number" id="edit-codigo-prof" placeholder="Código do Professor" />
+            <input type="text" id="edit-nome-prof" placeholder="Novo Nome" />
+            <input type="text" id="edit-disciplina-prof" placeholder="Nova Disciplina" />
+            <input type="text" id="edit-turma-prof" placeholder="Nova Turma" />
+            <button type="submit">Salvar Alterações</button>
+            <button type="reset">Limpar</button>
+            <div id="success-message-edit-prof" style="display:none;"></div>
+        </form>
+    </div>
+
+    <div style="text-align: center;">
+        <button class="voltar-btn" onclick="window.location.href='index.html'">Voltar</button>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const form = document.getElementById("editar-professor-form");
+            const codigoInput = document.getElementById("edit-codigo-prof");
+            const nomeInput = document.getElementById("edit-nome-prof");
+            const disciplinaInput = document.getElementById("edit-disciplina-prof");
+            const turmaInput = document.getElementById("edit-turma-prof");
+            const successMessageEditProf = document.getElementById("success-message-edit-prof");
+
+            // Carregar o professor para edição
+            codigoInput.addEventListener("blur", () => {
+                const codigoProfessor = codigoInput.value.trim();
+
+                if (!codigoProfessor) {
+                    alert("Por favor, insira o código do professor para editar.");
+                    return;
+                }
+
+                let professores = JSON.parse(localStorage.getItem("professores")) || [];
+                const professor = professores.find(p => p.codigo === codigoProfessor);
+
+                if (professor) {
+                    nomeInput.value = professor.nome;
+                    disciplinaInput.value = professor.disciplina;
+                    turmaInput.value = professor.turma;
+                } else {
+                    alert("Professor não encontrado.");
+                }
+            });
+
+            // Salvar alterações
+            form.addEventListener("submit", (e) => {
+                e.preventDefault();
+
+                const codigoProfessor = codigoInput.value.trim();
+                const nome = nomeInput.value.trim();
+                const disciplina = disciplinaInput.value.trim();
+                const turma = turmaInput.value.trim();
+
+                if (!codigoProfessor || !nome || !disciplina || !turma) {
+                    alert("Preencha todos os campos para editar o professor.");
+                    return;
+                }
+
+                let professores = JSON.parse(localStorage.getItem("professores")) || [];
+                const index = professores.findIndex(p => p.codigo === codigoProfessor);
+
+                if (index !== -1) {
+                    // Atualizar o professor
+                    professores[index] = {
+                        codigo: codigoProfessor,
+                        nome,
+                        disciplina,
+                        turma
+                    };
+
+                    // Salvar de volta no localStorage
+                    localStorage.setItem("professores", JSON.stringify(professores));
+
+                    // Feedback ao usuário
+                    successMessageEditProf.style.display = "block";
+                    successMessageEditProf.textContent = "Professor editado com sucesso!";
+
+                    // Limpa o formulário
+                    form.reset();
+                    setTimeout(() => {
+                        successMessageEditProf.style.display = "none";
+                    }, 3000);
+                } else {
+                    alert("Professor com esse código não encontrado.");
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
