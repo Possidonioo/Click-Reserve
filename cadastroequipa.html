@@ -2,7 +2,7 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Click&Reserve - Cadastro/Edição/Exclusão</title>
+    <title>Click&Reserve - Cadastro/Exclusão de Equipamentos</title>
     <style>
         body {
             margin: 0;
@@ -61,23 +61,14 @@
             padding: 30px 20px;
         }
 
-        .form-container-bottom {
-            display: flex;
-            justify-content: center;
-            margin-top: 20px;
-        }
-
         form {
             flex: 1 1 300px;
             background-color: #ffffffcc;
             border-radius: 10px;
             padding: 30px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
         }
-        .form-professor {
-    max-width: 600px; 
-   
-}
 
         form input,
         form button,
@@ -115,54 +106,29 @@
             text-align: center;
         }
 
-        #success-message,
-        #success-message-prof,
-        #success-message-edit {
+        #success-message {
             text-align: center;
             font-weight: bold;
             margin-top: 15px;
         }
 
-        h2 {
+        h2, h3 {
             font-family: 'Georgia', serif;
             text-align: center;
         }
-        h3{
-            font-family: 'Georgia', serif;
-            text-align: center;
+
+        .voltar-btn {
+            width: 200px;
+            padding: 12px;
+            background: linear-gradient(to right, #43cea2, #185a9d);
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            margin-top: 10px;
+            margin-bottom: 50px;
+            font-weight: bold;
+            cursor: pointer;
         }
-        #lista-professores {
-  margin-top: 15px;
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
-
-.professor-item {
-  background-color: #f3f3f3;
-  padding: 10px;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
-.form-container form {
-    flex: 1 1 300px;
-    background-color: #ffffffcc;
-    border-radius: 10px;
-    padding: 30px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px; /* Adiciona um espaço entre os formulários */
-}
-.form-professor {
-    flex: 1 1 300px;
-    background-color: #ffffffcc;
-    border-radius: 10px;
-    padding: 30px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
     </style>
 </head>
 <body>
@@ -172,435 +138,104 @@
             <span class="logo-text">Click&Reserve</span>
         </div>
     </header>
-<h3>Acesso permitido apenas a Administradores</h3>
+
+    <h3>Acesso permitido apenas a Administradores</h3>
+
     <div class="form-container">
         <form id="equipamento-form">
             <h2>Cadastro ou Exclusão de Equipamentos</h2>
-            <input type="text" id="nome" placeholder="Nome do Equipamento" />
-            <input type="text" id="tipo" placeholder="Tipo de Equipamento" />
-            <input type="number" id="numero" placeholder="Código do Equipamento" />
+            <input type="text" id="nome" placeholder="Nome do Equipamento" required />
+            <input type="text" id="tipo" placeholder="Tipo de Equipamento" required />
+            <input type="number" id="numero" placeholder="Código do Equipamento" required />
+            
             <label for="file-upload" class="custom-file-label">Imagem do equipamento</label>
             <input type="file" id="file-upload" class="custom-file-input" multiple>
+
             <button type="submit">Salvar Equipamento</button>
-            <button type="button" id="apagar-equipamento">Apagar Equipamento</button> 
-            <div id="success-message" style="display:none;"></div>
-        </form>
+            <button type="button" id="apagar-equipamento">Apagar Equipamento</button>
 
-        <form id="editar-form">
-            <h2>Edição de Equipamentos</h2>
-            <input type="text" id="edit-nome" placeholder="Novo Nome do Equipamento" />
-            <input type="text" id="edit-tipo" placeholder="Novo Tipo de Equipamento" />
-            <input type="number" id="edit-numero" placeholder="Novo Código do Equipamento" />
-            <label for="file-upload" class="custom-file-label">Nova Imagem do equipamento</label>
-            <button type="submit">Salvar Alterações</button>
-            <button type="reset">Limpar</button>
-            <div id="success-message-edit" style="display:none;"></div>
+            <div id="success-message" style="display:none;">Operação realizada com sucesso!</div>
         </form>
     </div>
 
-    <div class="form-container">
-
-        <form id="professor-form" class="form-professor">
-            <h2>Cadastro ou Exclusão de Professores</h2>
-            <input type="number" id="codigo-prof" placeholder="Código do Professor" />
-            <input type="text" id="nome-prof" placeholder="Nome do Professor" />
-            <input type="text" id="disciplina-prof" placeholder="Disciplina" />
-            <input type="text" id="turma-prof" placeholder="Turma" />
-            <label for="file-upload" class="custom-file-label">Foto do Professor</label>
-            <button type="submit">Salvar Professor</button>
-            <button type="button" id="apagar-professor">Apagar Professor</button>
-            <div id="success-message-prof" style="display:none;"></div>
-        </form>
-        <form id="editar-professor-form" class="form-professor">
-            <h2>Edição de Professores</h2>
-            <input type="number" id="edit-codigo-prof" placeholder="Código do Professor" />
-            <input type="text" id="edit-nome-prof" placeholder="Novo Nome" />
-            <input type="text" id="edit-disciplina-prof" placeholder="Nova Disciplina" />
-            <input type="text" id="edit-turma-prof" placeholder="Nova Turma" />
-            <button type="submit">Salvar Alterações</button>
-            <button type="reset">Limpar</button>
-            <div id="success-message-edit-prof" style="display:none;"></div>
-        </form>
-        <form id="consulta-professor-form" class="form-professor">
-            <h2>Consulta de Professores</h2>
-            <input type="text" id="busca-professor" placeholder="Buscar por nome" onkeyup="filtrarProfessores()" />
-            
-            <div id="lista-professores">
-                <div id="nenhum-professor" style="text-align:center; display:none; color:red; font-weight:bold;">Professor não encontrado.</div>
-              <div class="professor-item" data-codigo="037">
-                <img src="profes.jpg" alt="Professor" style="width:60px; height:60px; border-radius:50%;">
-                <div><strong>Nome:</strong> Dalmo Maia</div>
-                <div><strong>Disciplina:</strong> Informática</div>
-                <div><strong>Cod:</strong> 037</div>
-              </div>
-              <div class="professor-item" data-codigo="049">
-                <img src="prof.jpg" alt="Professor" style="width:60px; height:60px; border-radius:50%;">
-                <div><strong>Nome:</strong> Fábio Teixeira</div>
-                <div><strong>Disciplina:</strong> Informática</div>
-                <div><strong>Cod:</strong> 049</div>
-              </div>
-              <div class="professor-item" data-codigo="035">
-                <img src="profess.jpg" alt="Professor" style="width:60px; height:60px; border-radius:50%;">
-                <div><strong>Nome:</strong> Wellington Lima</div>
-                <div><strong>Disciplina:</strong> Geografia</div>
-                <div><strong>Cod:</strong> 035</div>
-              </div>
-            </div>
-          </form>
+    <div style="text-align: center;">
+        <button class="voltar-btn" onclick="window.location.href='index.html'">Voltar</button>
     </div>
-
-    <div class="form-container">
-        <!-- Cadastro e Exclusão de Horários -->
-        <form id="horario-form" class="form-professor">
-            <h2>Cadastro ou Exclusão de Horários</h2>
-            <input type="text" id="nome-horario" placeholder="Nome do Professor" />
-            <input type="text" id="dia-horario" placeholder="Dia da Semana" />
-            <input type="text" id="hora-horario" placeholder="Horário (ex: 08:00 - 09:00)" />
-            <button type="submit">Salvar Horário</button>
-            <button type="button" id="apagar-horario">Apagar Horário</button>
-            <div id="success-message-horario" style="display:none;"></div>
-        </form>
-    
-        <form id="editar-horario-form" class="form-professor">
-            <h2>Edição de Horário</h2>
-            <input type="text" id="edit-nome-horario" placeholder="Nome do Professor" />
-            <input type="text" id="edit-dia-horario" placeholder="Novo Dia da Semana" />
-            <input type="text" id="edit-hora-horario" placeholder="Novo Horário" />
-            <input type="text" id="edit-sala-horario" placeholder="Nova Sala" />
-            <button type="submit">Salvar Alterações</button>
-            <button type="reset">Limpar</button>
-            <div id="success-message-edit-horario" style="display:none;"></div>
-        </form>
-
-        <!-- Consulta de Horários -->
-        <form id="consulta-horario-form" class="form-professor">
-            <h2>Consulta de Horários</h2>
-            <input type="text" id="busca-horario" placeholder="Buscar por nome" onkeyup="filtrarHorarios()" />
-            <div id="lista-horarios">
-                <div id="nenhum-horario" style="text-align:center; display:none; color:red; font-weight:bold;">Horário não encontrado.</div>
-                <!-- Exemplo de horário existente -->
-                <div class="horario-item" data-nome="dalmo">
-                    <div><strong>Nome:</strong> Dalmo Maia</div>
-                    <div><strong>Dia:</strong> Segunda-feira</div>
-                    <div><strong>Horário:</strong> 08:00 - 09:00</div>
-                </div>
-            </div>
-        </form>
-    </div>
-    <div style="display: flex; justify-content: center;">
-    <button class="voltar-btn" onclick="window.location.href='index.html'" style="width: 200px; padding: 12px;  background: linear-gradient(to right, #43cea2, #185a9d);; color: #ffffff; border: none; border-radius: 5px; margin-top: 10px; margin-bottom: 50px; font-weight: bold; cursor: pointer;">Voltar</button>
-</div>
+	
     <script>
-        document.getElementById('equipamento-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const nome = document.getElementById('nome').value.trim();
-            const tipo = document.getElementById('tipo').value.trim();
-            const numero = document.getElementById('numero').value.trim();
-            const imagem = document.getElementById('file-upload').files;
-            const message = document.getElementById('success-message');
+    document.addEventListener("DOMContentLoaded", () => {
+        const form = document.getElementById("equipamento-form");
+        const nomeInput = document.getElementById("nome");
+        const tipoInput = document.getElementById("tipo");
+        const numeroInput = document.getElementById("numero");
+        const fileInput = document.getElementById("file-upload");
+        const successMessage = document.getElementById("success-message");
+        const apagarBtn = document.getElementById("apagar-equipamento");
 
-            if (!nome || !tipo || !numero || imagem.length === 0) {
-                message.style.display = 'block';
-                message.style.color = 'red';
-                message.textContent = 'Todos os dados obrigatórios devem ser preenchidos.';
+        // Salvando dados
+        form.addEventListener("submit", (e) => {
+            e.preventDefault();
+
+            const equipamento = {
+                nome: nomeInput.value.trim(),
+                tipo: tipoInput.value.trim(),
+                numero: numeroInput.value.trim(),
+                imagem: fileInput.files.length > 0 ? fileInput.files[0].name : "Sem imagem"
+            };
+
+            // Simula o armazenamento no localStorage
+            let equipamentos = JSON.parse(localStorage.getItem("equipamentos")) || [];
+            equipamentos.push(equipamento);
+            localStorage.setItem("equipamentos", JSON.stringify(equipamentos));
+
+            // Feedback ao usuário
+            successMessage.style.display = "block";
+            successMessage.textContent = "Equipamento salvo com sucesso!";
+
+            // Limpa o formulário
+            form.reset();
+
+            // Oculta mensagem após 3 segundos
+            setTimeout(() => {
+                successMessage.style.display = "none";
+            }, 3000);
+        });
+
+        // Apagar equipamento com base no código inserido
+        apagarBtn.addEventListener("click", () => {
+            const codigoEquipamento = numeroInput.value.trim(); // Código do equipamento a ser apagado
+
+            if (!codigoEquipamento) {
+                alert("Por favor, insira o código do equipamento para apagar.");
                 return;
             }
 
-            message.style.display = 'block';
-            message.style.color = 'green';
-            message.textContent = 'Equipamento salvo com sucesso!';
-            this.reset();
-        });
-        document.getElementById('editar-form').addEventListener('submit', function(e) {
-            e.preventDefault();
+            let equipamentos = JSON.parse(localStorage.getItem("equipamentos")) || [];
 
-            const nome = document.getElementById('edit-nome').value.trim();
-            const tipo = document.getElementById('edit-tipo').value.trim();
-            const numero = document.getElementById('edit-numero').value.trim();
-            const message = document.getElementById('success-message-edit');
+            // Encontra o índice do equipamento com o código inserido
+            const index = equipamentos.findIndex(equipamento => equipamento.numero === codigoEquipamento);
 
-            if (!nome || !tipo || !numero) {
-                message.style.display = 'block';
-                message.style.color = 'red';
-                message.textContent = 'Todos os campos devem ser preenchidos.';
-                return;
+            if (index !== -1) {
+                // Remove o equipamento encontrado
+                equipamentos.splice(index, 1);
+                localStorage.setItem("equipamentos", JSON.stringify(equipamentos));
+
+                successMessage.style.display = "block";
+                successMessage.textContent = `Equipamento com código ${codigoEquipamento} apagado com sucesso!`;
+
+                // Limpa o campo de código
+                numeroInput.value = "";
+
+                setTimeout(() => {
+                    successMessage.style.display = "none";
+                }, 3000);
+            } else {
+                alert("Equipamento com esse código não encontrado.");
             }
-
-            message.style.display = 'block';
-            message.style.color = 'green';
-            message.textContent = 'Equipamento alterado com sucesso!';
-            this.reset();
         });
-
-        // Cadastro de Professores
-        document.getElementById('professor-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-
-            const codigo = document.getElementById('codigo-prof').value.trim();
-            const nome = document.getElementById('nome-prof').value.trim();
-            const disciplina = document.getElementById('disciplina-prof').value.trim();
-            const turma = document.getElementById('turma-prof').value.trim();
-            const message = document.getElementById('success-message-prof');
-
-            if (!codigo || !nome || !disciplina || !turma) {
-                message.style.display = 'block';
-                message.style.color = 'red';
-                message.textContent = 'Todos os dados obrigatórios devem ser preenchidos.';
-                return;
-            }
-
-            message.style.display = 'block';
-            message.style.color = 'green';
-            message.textContent = 'Professor salvo com sucesso!';
-            this.reset();
-        });
-        // "Excluir" equipamento (simulação)
-document.getElementById('apagar-equipamento').addEventListener('click', function () {
-    const nome = document.getElementById('nome').value.trim();
-    const tipo = document.getElementById('tipo').value.trim();
-    const numero = document.getElementById('numero').value.trim();
-    const message = document.getElementById('success-message');
-
-    if (!nome || !tipo || !numero) {
-        message.style.display = 'block';
-        message.style.color = 'red';
-        message.textContent = 'Informe os dados do equipamento a ser apagado.';
-        return;
-    }
-
-    // Simula exclusão de equipamento
-    message.style.display = 'block';
-    message.style.color = 'green';
-    message.textContent = 'Equipamento apagado com sucesso!';
-
-    document.getElementById('equipamento-form').reset();
-});
-function filtrarProfessores() {
-  const filtro = document.getElementById("busca-professor").value.toLowerCase();
-  const professores = document.querySelectorAll("#lista-professores .professor-item");
-  const mensagem = document.getElementById("nenhum-professor");
-  let algumVisivel = false;
-
-  professores.forEach(function(item) {
-    const nome = item.querySelector("div").textContent.toLowerCase();
-    if (nome.includes(filtro)) {
-      item.style.display = "flex";
-      algumVisivel = true;
-    } else {
-      item.style.display = "none";
-    }
-  });
-
-  mensagem.style.display = algumVisivel ? "none" : "block";
-}
-document.getElementById('apagar-professor').addEventListener('click', function () {
-    const codigo = document.getElementById('codigo-prof').value.trim();
-    const message = document.getElementById('success-message-prof');
-
-    if (!codigo) {
-        message.style.display = 'block';
-        message.style.color = 'red';
-        message.textContent = 'Informe o código do professor para apagar.';
-        return;
-    }
-
-    const lista = document.getElementById('lista-professores');
-    const itemParaRemover = lista.querySelector(`.professor-item[data-codigo="${codigo}"]`);
-
-    if (itemParaRemover) {
-        lista.removeChild(itemParaRemover);
-        message.style.display = 'block';
-        message.style.color = 'green';
-        message.textContent = 'Professor apagado com sucesso!';
-    } else {
-        message.style.display = 'block';
-        message.style.color = 'red';
-        message.textContent = 'Professor não encontrado.';
-    }
-
-    document.getElementById('professor-form').reset();
-});
-document.getElementById('editar-professor-form').addEventListener('submit', function (e) {
-    e.preventDefault();
-
-    const codigo = document.getElementById('edit-codigo-prof').value.trim();
-    const novoNome = document.getElementById('edit-nome-prof').value.trim();
-    const novaDisciplina = document.getElementById('edit-disciplina-prof').value.trim();
-    const novaTurma = document.getElementById('edit-turma-prof').value.trim();
-    const message = document.getElementById('success-message-edit-prof');
-
-    if (!codigo || !novoNome || !novaDisciplina || !novaTurma) {
-        message.style.display = 'block';
-        message.style.color = 'red';
-        message.textContent = 'Todos os campos devem ser preenchidos para editar.';
-        return;
-    }
-
-    const item = document.querySelector(`.professor-item[data-codigo="${codigo}"]`);
-
-    if (item) {
-        const infoDivs = item.querySelectorAll('div');
-        infoDivs[0].innerHTML = `<strong>Nome:</strong> ${novoNome}`;
-        infoDivs[1].innerHTML = `<strong>Disciplina:</strong> ${novaDisciplina}`;
-        infoDivs[2].innerHTML = `<strong>Cod:</strong> ${codigo}`;
-
-        message.style.display = 'block';
-        message.style.color = 'green';
-        message.textContent = 'Professor alterado com sucesso!';
-        this.reset();
-    } else {
-        message.style.display = 'block';
-        message.style.color = 'red';
-        message.textContent = 'Professor não encontrado.';
-    }
-});
-document.getElementById('horario-form').addEventListener('submit', function (e) {
-    e.preventDefault();
-
-    const nome = document.getElementById('nome-horario').value.trim();
-    const dia = document.getElementById('dia-horario').value.trim();
-    const hora = document.getElementById('hora-horario').value.trim();
-    const message = document.getElementById('success-message-horario');
-
-    if (!nome || !dia || !hora) {
-        message.style.display = 'block';
-        message.style.color = 'red';
-        message.textContent = 'Todos os dados devem ser preenchidos.';
-        return;
-    }
-
-    const lista = document.getElementById('lista-horarios');
-    const novoHorario = document.createElement('div');
-    novoHorario.className = 'horario-item';
-    novoHorario.dataset.nome = nome.toLowerCase();
-    novoHorario.innerHTML = `
-        <div><strong>Nome:</strong> ${nome}</div>
-        <div><strong>Dia:</strong> ${dia}</div>
-        <div><strong>Horário:</strong> ${hora}</div>
-    `;
-    lista.appendChild(novoHorario);
-
-    message.style.display = 'block';
-    message.style.color = 'green';
-    message.textContent = 'Horário salvo com sucesso!';
-    this.reset();
-});
-
-document.getElementById('apagar-horario').addEventListener('click', function () {
-    const nome = document.getElementById('nome-horario').value.trim().toLowerCase();
-    const message = document.getElementById('success-message-horario');
-    const lista = document.getElementById('lista-horarios');
-    const itemParaRemover = lista.querySelector(`.horario-item[data-nome="${nome}"]`);
-
-    if (itemParaRemover) {
-        lista.removeChild(itemParaRemover);
-        message.style.display = 'block';
-        message.style.color = 'green';
-        message.textContent = 'Horário apagado com sucesso!';
-    } else {
-        message.style.display = 'block';
-        message.style.color = 'red';
-        message.textContent = 'Horário não encontrado.';
-    }
-
-    document.getElementById('horario-form').reset();
-});
-
-function filtrarHorarios() {
-    const filtro = document.getElementById("busca-horario").value.toLowerCase();
-    const horarios = document.querySelectorAll("#lista-horarios .horario-item");
-    const mensagem = document.getElementById("nenhum-horario");
-    let algumVisivel = false;
-
-    horarios.forEach(function(item) {
-        const nome = item.dataset.nome;
-        if (nome.includes(filtro)) {
-            item.style.display = "block";
-            algumVisivel = true;
-        } else {
-            item.style.display = "none";
-        }
     });
-
-    mensagem.style.display = algumVisivel ? "none" : "block";
-}
-document.getElementById('editar-horario-form').addEventListener('submit', function (e) {
-    e.preventDefault();
-
-    const nome = document.getElementById('edit-nome-horario').value.trim().toLowerCase();
-    const novoDia = document.getElementById('edit-dia-horario').value.trim();
-    const novaHora = document.getElementById('edit-hora-horario').value.trim();
-    const novaSala = document.getElementById('edit-sala-horario').value.trim();
-    const message = document.getElementById('success-message-edit-horario');
-
-    if (!nome || !novoDia || !novaHora || !novaSala) {
-        message.style.display = 'block';
-        message.style.color = 'red';
-        message.textContent = 'Todos os campos devem ser preenchidos para editar.';
-        return;
-    }
-
-    const horarios = document.querySelectorAll("#lista-horarios .horario-item");
-    let encontrado = false;
-
-    horarios.forEach(function (item) {
-        const itemNome = item.querySelector('.horario-nome').textContent.toLowerCase();
-        if (itemNome.includes(nome)) {
-            item.querySelector('.horario-dia').innerHTML = `<strong>Dia:</strong> ${novoDia}`;
-            item.querySelector('.horario-hora').innerHTML = `<strong>Hora:</strong> ${novaHora}`;
-            item.querySelector('.horario-sala').innerHTML = `<strong>Sala:</strong> ${novaSala}`;
-            encontrado = true;
-        }
-    });
-
-    if (encontrado) {
-        message.style.display = 'block';
-        message.style.color = 'green';
-        message.textContent = 'Horário alterado com sucesso!';
-        this.reset();
-    } else {
-        message.style.display = 'block';
-        message.style.color = 'red';
-        message.textContent = 'Professor não encontrado.';
-    }
-    setTimeout(() => message.style.display = 'none', 3000);
-
-});
-document.getElementById('editar-horario-form').addEventListener('submit', function (e) {
-    e.preventDefault();
-
-    const nome = document.getElementById('edit-nome-horario').value.trim();
-    const dia = document.getElementById('edit-dia-horario').value.trim();
-    const hora = document.getElementById('edit-hora-horario').value.trim();
-    const sala = document.getElementById('edit-sala-horario').value.trim();
-    const message = document.getElementById('success-message-edit-horario');
-
-    if (!nome || !dia || !hora || !sala) {
-        message.style.display = 'block';
-        message.style.color = 'red';
-        message.textContent = 'Todos os campos devem ser preenchidos.';
-        return;
-    }
-
-    const item = document.querySelector(`#lista-horarios .horario-item[data-nome="${nome.toLowerCase()}"]`);
-
-    if (item) {
-        const infos = item.querySelectorAll('div');
-        infos[0].innerHTML = `<strong>Nome:</strong> ${nome}`;
-        infos[1].innerHTML = `<strong>Dia:</strong> ${dia}`;
-        infos[2].innerHTML = `<strong>Horário:</strong> ${hora} - Sala: ${sala}`;
-
-        message.style.display = 'block';
-        message.style.color = 'green';
-        message.textContent = 'Horário alterado com sucesso!';
-        this.reset();
-    } else {
-        message.style.display = 'block';
-        message.style.color = 'red';
-        message.textContent = 'Horário não encontrado.';
-    }
-});
-
 </script>
+
+
 </body>
 </html>
