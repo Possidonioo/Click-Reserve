@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Click&Reserve - Página Inicial ADM</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+  
+    body {
+      background-color: #f4f4f4;
+      color: #333;
+    }
+  
+    header {
+      background: linear-gradient(to right, #43cea2, #185a9d);
+      color: #fff;
+      padding: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+  
+    header h1 {
+      font-size: 24px;
+      font-family: 'Georgia', serif;
+    }
+  
+    nav {
+      width: 100%;
+      margin-top: 10px;
+    }
+  
+    nav ul {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      list-style: none;
+      padding: 0;
+    }
+  
+    nav li {
+      position: relative;
+    }
+  
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 16px;
+      padding: 10px 15px;
+      display: block;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+    }
+
+    nav a:hover {
+      background-color: #185a9d;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+  
+    .logo-img {
+      height: 40px;
+    }
+  
+    .hero {
+      background-color: #16b391;
+      color: #fff;
+      padding: 60px 20px;
+      text-align: center;
+    }
+  
+    .hero h2 {
+      font-size: 36px;
+      margin-bottom: 10px;
+    }
+  
+    .hero p {
+      font-size: 18px;
+      margin-bottom: 20px;
+    }
+  
+    .hero a {
+      background-color: #fff;
+      color: #e6eff8;
+      padding: 12px 25px;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: bold;
+    }
+  
+    .reservados-btn {
+      display: inline-block;
+      background: linear-gradient(to right, #43cea2, #185a9d);
+      padding: 14px 28px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 16px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+  
+    .reservados-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.25);
+    }
+  
+    .benefits,
+    .equipamentos,
+    .como-funciona {
+      padding: 40px 20px;
+      max-width: 1000px;
+      margin: auto;
+    }
+  
+    .benefits h3,
+    .equipamentos h3,
+    .como-funciona h3 {
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 24px;
+    }
+  
+    .benefit-items,
+    .equipamento-lista,
+    .passos {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+    }
+  
+    .benefit,
+    .equipamento,
+    .passo {
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      flex: 1 1 200px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+  
+    footer {
+      background: linear-gradient(to right, #43cea2, #185a9d);
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
+    }
+  
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+  
+      .logo-container {
+        flex-direction: column;
+      }
+  
+      nav ul {
+        flex-direction: column;
+        align-items: center;
+      }
+  
+      nav a {
+        margin: 5px;
+        font-size: 14px;
+      }
+  
+      .hero h2 {
+        font-size: 28px;
+      }
+  
+      .hero p {
+        font-size: 16px;
+      }
+  
+      .reservados-btn {
+        font-size: 14px;
+        padding: 10px 20px;
+      }
+  
+      .benefit,
+      .equipamento,
+      .passo {
+        flex: 1 1 100%;
+      }
+  
+      .benefits,
+      .equipamentos,
+      .como-funciona {
+        padding: 20px 10px;
+      }
+  
+      .benefits h3,
+      .equipamentos h3,
+      .como-funciona h3 {
+        font-size: 20px;
+      }
+  
+      .logo-img {
+        height: 35px;
+      }
+  
+      h1 {
+        font-size: 22px;
+      }
+    }
+  
+    @media (max-width: 400px) {
+      .hero h2 {
+        font-size: 22px;
+      }
+  
+      .hero p {
+        font-size: 14px;
+      }
+  
+      .reservados-btn {
+        font-size: 12px;
+        padding: 8px 16px;
+      }
+  
+      nav a {
+        font-size: 12px;
+      }
+  
+      h1 {
+        font-size: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo-container">
+        <img src="logo3s.png" alt="Logo" class="logo-img">
+        <h1>Click&Reserve</h1>
+      </div>
+    <nav>
+      <ul>
+        <li><a href="index.html">Início</a></li>
+        <li><a href="cadastroequip.html">Cadastro/Exclusão de Equipamentos</a></li>
+        <li><a href="edicao.html">Edição Equipamento</a></li>
+        <li><a href="cadastroprof.html">Cadastro de Professores</a></li>
+        <li><a href="edicaoprof.html">Edição de Professores</a></li>
+        <li><a href="consulta.html">Consultar Professores</a></li>
+        <li><a href="cadastrohora.html">Cadastro/Exclusão de Horários</a></li>
+        <li><a href="edicaohora.html">Edição de Horários</a></li>
+        <li><a href="consultahora.html">Consultar Horários</a></li>
+      </ul>
+    </nav>
+  </header>
+  
+  <section class="hero">
+    <h2>Bem-vindo, Administrador</h2>
+    <p>Gerencie de forma eficiente os equipamentos, professores e horários para otimizar as reservas!</p>
+  </section>
+  
+  <section class="benefits">
+    <h3>Vantagens para Administradores</h3>
+    <div class="benefit-items">
+      <div class="benefit">
+        <h4>Controle Completo</h4>
+        <p>Gerencie todos os equipamentos e seus status de reserva com facilidade.</p>
+      </div>
+      <div class="benefit">
+        <h4>Cadastro e Edição</h4>
+        <p>Adicione, edite ou exclua equipamentos, professores e horários conforme necessário.</p>
+      </div>
+      <div class="benefit">
+        <h4>Relatórios Detalhados</h4>
+        <p>Obtenha consultas sobre as reservas e a utilização de equipamentos.</p>
+      </div>
+    </div>
+  </section>
+  
+  <section class="como-funciona">
+    <h3>Como Funciona</h3>
+    <div class="passos">
+      <div class="passo">
+        <h4>1. Gerencie Equipamentos</h4>
+        <p>Adicione, edite ou remova equipamentos para controle total.</p>
+      </div>
+      <div class="passo">
+        <h4>2. Gerencie Professores</h4>
+        <p>Cadastre ou edite informações dos professores conforme necessário.</p>
+      </div>
+      <div class="passo">
+        <h4>3. Gerencie Horários</h4>
+        <p>Configure os horários de disponibilidade dos equipamentos e professores.</p>
+      </div>
+    </div>
+  </section>
+  
+  <footer>
+    <p>© 2025 Click&Reserve. Todos os direitos reservados.</p>
+  </footer>
+</body>
+</html>
