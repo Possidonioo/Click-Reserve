@@ -1,0 +1,213 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <title>Click&Reserve - Login</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+  
+    html, body {
+      height: 100%;
+      font-family: 'Georgia', serif;
+    }
+  
+    body {
+      display: flex;
+      flex-direction: column;
+      background: linear-gradient(to bottom, #d7e1ec, #b1bbb7);
+    }
+  
+    .header {
+      background: linear-gradient(to right, #43cea2, #185a9d);
+      padding: 10px 0;
+      text-align: center;
+      border-bottom: 1px solid #ccc;
+    }
+  
+    .logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 1.5rem;
+      color: white;
+      flex-wrap: wrap;
+      text-align: center;
+    }
+  
+    .logo-img {
+      width: 60px;
+      height: 60px;
+      margin-right: 10px;
+      object-fit: contain;
+    }
+  
+    .main-content {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 40px 20px;
+    }
+  
+    .login-container {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+      max-width: 400px;
+      width: 100%;
+      text-align: center;
+    }
+  
+    .login-container h2 {
+      margin-bottom: 20px;
+      font-size: 1.8rem;
+      color: #333;
+    }
+  
+    .login-container input {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 1rem;
+    }
+  
+    .login-container button {
+      width: 100%;
+      padding: 12px;
+      background: linear-gradient(to right, #43cea2, #185a9d);
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: background 0.3s ease;
+    }
+  
+    .login-container button:hover {
+      opacity: 0.9;
+    }
+  
+    .signup-link {
+      margin-top: 15px;
+      font-size: 14px;
+    }
+  
+    .signup-link a {
+      color: #185a9d;
+      text-decoration: none;
+      font-weight: bold;
+    }
+  
+    .signup-link a:hover {
+      text-decoration: underline;
+    }
+  
+    /* RESPONSIVIDADE */
+    @media (max-width: 600px) {
+      .logo {
+        flex-direction: column;
+        font-size: 1.3rem;
+      }
+  
+      .logo-img {
+        width: 50px;
+        height: 50px;
+        margin: 0 0 5px 0;
+      }
+  
+      .login-container {
+        padding: 20px;
+      }
+  
+      .login-container h2 {
+        font-size: 1.5rem;
+      }
+  
+      .login-container input,
+      .login-container button {
+        font-size: 0.95rem;
+      }
+  
+      .signup-link {
+        font-size: 13px;
+      }
+    }
+  
+    @media (max-width: 400px) {
+      .login-container {
+        padding: 15px;
+      }
+  
+      .login-container h2 {
+        font-size: 1.3rem;
+      }
+  
+      .login-container input,
+      .login-container button {
+        font-size: 0.9rem;
+        padding: 10px;
+      }
+  
+      .signup-link {
+        font-size: 12px;
+      }
+    }
+  </style>
+  
+</head>
+<body>
+  <header class="header">
+    <a href="paginicial.html" style="text-decoration: none;">
+        <div class="logo">
+          <img src="logo3s.png" alt="Logo" class="logo-img">
+          <span class="logo-text">Click&Reserve</span>
+        </div>
+      </a>
+  </header>
+
+  <main class="main-content">
+    <div class="login-container">
+      <h2>Bem-vindo de volta!</h2>
+     <form id="loginForm" action="login.php" method="POST">
+  <input type="text" name="email" id="username" placeholder="E-mail" required>
+  <input type="password" name="senha" id="password" placeholder="Senha" required>
+  <button type="submit">Entrar</button>
+  <button class="voltar-btn" onclick="window.location.href='paginicial.html'">Voltar</button>
+</form>
+
+      <p class="signup-link">Não tem uma conta? <a href="cadastro.html">Cadastre-se</a></p>
+    </div>
+  </main>
+
+  <script>
+    document.getElementById('loginForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+      
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+
+      if (username === '' || password === '') {
+      alert('Por favor, preencha todos os campos.');
+      return;
+    }
+
+      if (username === 'usuario' && password === 'senha123') {
+        window.location.href = 'equipamentos.html';
+      } else {
+        alert('Usuário ou senha incorretos');
+      }
+    });
+  </script>
+</body>
+</html>
