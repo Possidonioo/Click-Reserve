@@ -1,0 +1,234 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Click&Reserve - Cadastro/Exclusão de Horários</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(to bottom, #d7e1ec, #b1bbb7);
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, #d7e1ec, #b1bbb7);
+            background-size: cover;
+            background-position: center;
+            opacity: 0.4;
+            z-index: -1;
+        }
+
+        .header {
+            background: linear-gradient(to right, #43cea2, #185a9d);
+            text-align: center;
+            padding: 10px 0;
+            position: sticky;
+            top: 0;
+            width: 100%;
+            z-index: 10;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.5rem;
+            color: white;
+            font-family: 'Georgia', serif;
+        }
+
+        .logo-img {
+            width: 80px;
+            height: 80px;
+            margin-right: 10px;
+            object-fit: contain;
+        }
+
+        .form-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 40px;
+            padding: 30px 20px;
+        }
+
+        form {
+            flex: 1 1 300px;
+            background-color: #ffffffcc;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        form input,
+        form button,
+        .custom-file-label {
+            width: 90%;
+            display: block;
+            margin: 10px 0;
+            padding: 12px;
+            font-size: 1rem;
+        }
+
+        form button {
+            background: linear-gradient(to right, #43cea2, #185a9d);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        form button:hover {
+            opacity: 0.9;
+        }
+
+        .custom-file-input {
+            display: none;
+        }
+
+        .custom-file-label {
+            background-color: #f0f0f0;
+            color: #555;
+            border: 2px dashed #aaa;
+            border-radius: 8px;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        #success-message {
+            text-align: center;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+
+        h2, h3 {
+            font-family: 'Georgia', serif;
+            text-align: center;
+        }
+
+        .voltar-btn {
+            width: 200px;
+            padding: 12px;
+            background: linear-gradient(to right, #43cea2, #185a9d);
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            margin-top: 10px;
+            margin-bottom: 50px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <img src="logo3s.png" alt="Logo" class="logo-img">
+            <span class="logo-text">Click&Reserve</span>
+        </div>
+    </header>
+
+    <h3>Acesso permitido apenas a Administradores</h3>
+
+    <div class="form-container">
+        <form id="horario-form" class="form-professor">
+            <h2>Cadastro ou Exclusão de Horários</h2>
+            <input type="text" id="nome-horario" placeholder="Nome do Professor" />
+            <input type="text" id="dia-horario" placeholder="Dia da Semana" />
+            <input type="text" id="hora-horario" placeholder="Horário (ex: 08:00 - 09:00)" />
+            <button type="submit">Salvar Horário</button>
+            <button type="button" id="apagar-horario">Apagar Horário</button>
+            <div id="success-message-horario" style="display:none;"></div>
+        </form>
+    </div>
+
+    <div style="text-align: center;">
+        <button class="voltar-btn" onclick="window.location.href='index.html'">Voltar</button>
+    </div>
+	
+    <script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const form = document.getElementById("horario-form");
+        const nomeInput = document.getElementById("nome-horario");
+        const diaInput = document.getElementById("dia-horario");
+        const horaInput = document.getElementById("hora-horario");
+        const successMessage = document.getElementById("success-message-horario");
+        const apagarBtn = document.getElementById("apagar-horario");
+
+        // Salvar horário
+        form.addEventListener("submit", (e) => {
+            e.preventDefault();
+
+            const horario = {
+                nome: nomeInput.value.trim(),
+                dia: diaInput.value.trim(),
+                hora: horaInput.value.trim()
+            };
+
+            if (!horario.nome || !horario.dia || !horario.hora) {
+                alert("Por favor, preencha todos os campos para salvar.");
+                return;
+            }
+
+            let horarios = JSON.parse(localStorage.getItem("horarios")) || [];
+            horarios.push(horario);
+            localStorage.setItem("horarios", JSON.stringify(horarios));
+
+            successMessage.style.display = "block";
+            successMessage.textContent = "Horário salvo com sucesso!";
+            form.reset();
+
+            setTimeout(() => {
+                successMessage.style.display = "none";
+            }, 3000);
+        });
+
+        // Apagar horário
+        apagarBtn.addEventListener("click", () => {
+            const nome = nomeInput.value.trim();
+            const dia = diaInput.value.trim();
+            const hora = horaInput.value.trim();
+
+            if (!nome || !dia || !hora) {
+                alert("Preencha nome, dia e horário para apagar.");
+                return;
+            }
+
+            let horarios = JSON.parse(localStorage.getItem("horarios")) || [];
+
+            const index = horarios.findIndex(h =>
+                h.nome === nome && h.dia === dia && h.hora === hora
+            );
+
+            if (index !== -1) {
+                horarios.splice(index, 1);
+                localStorage.setItem("horarios", JSON.stringify(horarios));
+                successMessage.style.display = "block";
+                successMessage.textContent = "Horário apagado com sucesso!";
+                form.reset();
+                setTimeout(() => {
+                    successMessage.style.display = "none";
+                }, 3000);
+            } else {
+                alert("Horário não encontrado. Verifique os dados.");
+            }
+        });
+    });
+</script>
+
+
+
+</body>
+</html>
