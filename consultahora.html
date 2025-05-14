@@ -1,0 +1,199 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Click&Reserve - Consulta de Horários</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(to bottom, #d7e1ec, #b1bbb7);
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, #d7e1ec, #b1bbb7);
+            background-size: cover;
+            background-position: center;
+            opacity: 0.4;
+            z-index: -1;
+        }
+
+        .header {
+            background: linear-gradient(to right, #43cea2, #185a9d);
+            text-align: center;
+            padding: 10px 0;
+            position: sticky;
+            top: 0;
+            width: 100%;
+            z-index: 10;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.5rem;
+            color: white;
+            font-family: 'Georgia', serif;
+        }
+
+        .logo-img {
+            width: 80px;
+            height: 80px;
+            margin-right: 10px;
+            object-fit: contain;
+        }
+
+        .form-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 40px;
+            padding: 30px 20px;
+        }
+
+        form {
+            flex: 1 1 300px;
+            background-color: #ffffffcc;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        form input {
+            width: 90%;
+            display: block;
+            margin: 10px auto;
+            padding: 12px;
+            font-size: 1rem;
+        }
+
+        h2, h3 {
+            font-family: 'Georgia', serif;
+            text-align: center;
+        }
+
+        .voltar-btn {
+            width: 200px;
+            padding: 12px;
+            background: linear-gradient(to right, #43cea2, #185a9d);
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            margin-top: 10px;
+            margin-bottom: 50px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        #lista-professores {
+            margin-top: 20px;
+        }
+
+        .professor-item {
+            display: flex;
+            align-items: center;
+            background-color: #fdfdfd;
+            border-radius: 10px;
+            padding: 15px 20px;
+            margin: 20px auto;
+            max-width: 500px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: transform 0.2s ease-in-out;
+            gap: 20px;
+        }
+
+        .professor-item:hover {
+            transform: scale(1.02);
+        }
+
+        .professor-img {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #ccc;
+        }
+
+        .professor-info {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .professor-info div {
+            font-size: 0.95rem;
+        }
+
+        #nenhum-professor {
+            text-align: center;
+            display: none;
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <img src="logo3s.png" alt="Logo" class="logo-img">
+            <span class="logo-text">Click&Reserve</span>
+        </div>
+    </header>
+
+    <h3>Acesso permitido apenas a Administradores</h3>
+
+    <div class="form-container">
+        <form id="consulta-horario-form" class="form-professor">
+            <h2>Consulta de Horários</h2>
+            <input type="text" id="busca-horario" placeholder="Buscar por nome" onkeyup="filtrarHorarios()" />
+            <div id="lista-horarios">
+                <div id="nenhum-horario" style="text-align:center; display:none; color:red; font-weight:bold;">Horário não encontrado.</div>
+                <!-- Exemplo de horário existente -->
+                <div class="horario-item" data-nome="dalmo">
+                    <div><strong>Nome:</strong> Dalmo Maia</div>
+                    <div><strong>Dia:</strong> Segunda-feira</div>
+                    <div><strong>Horário:</strong> 08:00 - 09:00</div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div style="text-align: center;">
+        <button class="voltar-btn" onclick="window.location.href='index.html'">Voltar</button>
+    </div>
+
+<script>
+    function filtrarHorarios() {
+        const input = document.getElementById("busca-horario").value.toLowerCase();
+        const horarios = document.querySelectorAll(".horario-item");
+        let algumVisivel = false;
+
+        horarios.forEach((horario) => {
+            const texto = horario.textContent.toLowerCase();
+            const visivel = texto.includes(input);
+
+            horario.style.display = visivel ? "block" : "none";
+
+            if (visivel) {
+                algumVisivel = true;
+            }
+        });
+
+        document.getElementById("nenhum-horario").style.display = algumVisivel ? "none" : "block";
+    }
+</script>
+
+</body>
+</html>
